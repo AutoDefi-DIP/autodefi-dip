@@ -1,8 +1,11 @@
+const { nextui } = require('@nextui-org/react');
+
 module.exports = {
   content: [
     './src/app/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/layouts/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
   theme: {
@@ -122,10 +125,30 @@ module.exports = {
         },
       },
     },
+    darkMode: 'class',
+    plugins: [nextui()],
   },
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/container-queries'),
+    nextui({
+      prefix: 'nextui', // prefix for themes variables
+      addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
+      defaultTheme: 'light', // default theme from the themes object
+      defaultExtendTheme: 'light', // default theme to extend on custom themes
+      layout: {}, // common layout tokens (applied to all themes)
+      themes: {
+        light: {
+          layout: {}, // light theme layout tokens
+          colors: {}, // light theme colors
+        },
+        dark: {
+          layout: {}, // dark theme layout tokens
+          colors: {}, // dark theme colors
+        },
+        // ... custom themes
+      },
+    }),
   ],
 };

@@ -499,17 +499,22 @@ export const coinChangeData = [
 export const investFormData = [
   {
     id: 1,
-    name: 'Daily',
-    value: 'day',
+    name: 'Hour',
+    value: 'hour',
   },
   {
     id: 2,
-    name: 'Weekly',
-    value: 'week',
+    name: 'Day',
+    value: 'day',
   },
   {
     id: 3,
-    name: 'Monthly',
+    name: 'Week',
+    value: 'week',
+  },
+  {
+    id: 4,
+    name: 'Month',
     value: 'month',
   },
 ];

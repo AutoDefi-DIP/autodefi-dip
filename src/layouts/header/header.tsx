@@ -14,7 +14,11 @@ import WalletConnect from '@/components/nft/wallet-connect';
 import routes from '@/config/routes';
 import { useLayout } from '@/lib/hooks/use-layout';
 import { LAYOUT_OPTIONS } from '@/lib/constants';
-// import { ConnectKitButton } from 'connectkit';
+import { useLogin } from '@privy-io/react-auth';
+import { usePrivy, useWallets } from '@privy-io/react-auth';
+import { useEffect } from 'react';
+import Button from '@/components/ui/button';
+import { LockIcon } from '@/components/icons/lock-icon';
 
 function NotificationButton() {
   const { layout } = useLayout();
@@ -37,11 +41,33 @@ function NotificationButton() {
 }
 
 function HeaderRightArea() {
+  const { ready, authenticated, user, logout } = usePrivy();
+  const { wallets } = useWallets();
+  const wallet = wallets[0];
+
+  const { login } = useLogin({
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   return (
     <div className="relative order-last flex shrink-0 items-center gap-4 sm:gap-6 lg:gap-8">
       {/* <NotificationButton /> */}
       {/* <WalletConnect /> */}
       {/* <ConnectKitButton /> */}
+
+      {ready && authenticated ? (
+        <Button onClick={logout} shape="rounded">
+          {' '}
+          Logout
+        </Button>
+      ) : (
+        <Button onClick={login} shape="rounded">
+          {' '}
+          Login
+        </Button>
+      )}
     </div>
   );
 }

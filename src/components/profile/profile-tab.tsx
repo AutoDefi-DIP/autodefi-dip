@@ -15,19 +15,16 @@ import {
   authorProtocols,
 } from '@/data/static/author-profile';
 import Loader from '@/components/ui/loader';
+import { Tabs, Tab, Card, CardBody } from '@nextui-org/react';
 
 const tabMenu = [
   {
-    title: 'Collection',
-    path: 'collection',
+    title: 'Stretergies',
+    path: 'stretergies ',
   },
   {
     title: 'Portfolio',
-    path: 'portfolio',
-  },
-  {
-    title: 'History',
-    path: 'history',
+    path: 'collection',
   },
 ];
 
@@ -37,20 +34,30 @@ export default function ProfileTab() {
     <Suspense fallback={<Loader variant="blink" />}>
       <ParamTab tabMenu={tabMenu}>
         <TabPanel className="focus:outline-none">
-          <div
+          {/* <div
             className={cn(
               'grid gap-4 xs:grid-cols-2 lg:grid-cols-2 lg:gap-5 xl:gap-6 3xl:grid-cols-3 4xl:grid-cols-4',
               layout === LAYOUT_OPTIONS.RETRO
                 ? 'md:grid-cols-2'
-                : 'md:grid-cols-1'
+                : 'md:grid-cols-1',
             )}
-          >
-            {collections?.map((collection) => (
-              <CollectionCard
-                item={collection}
-                key={`collection-key-${collection?.id}`}
-              />
-            ))}
+          > */}
+          <div className="flex w-full flex-col">
+            <Tabs aria-label="Options">
+              <Tab key="active" title="Active">
+                <TransactionHistory />
+              </Tab>
+              <Tab key="completed" title="Completed">
+                <Card>
+                  <CardBody>
+                    <TransactionSearchForm />
+                  </CardBody>
+                </Card>
+              </Tab>
+              <Tab key="history" title="History">
+                <TransactionHistory />
+              </Tab>
+            </Tabs>
           </div>
         </TabPanel>
         <TabPanel className="focus:outline-none">
